@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { IconButton } from '@rmwc/icon-button'
 
-import './BottomNavigationBar.css'
 import '@material/icon-button/dist/mdc.icon-button.css';
-
 
 function BottomNavigationBar(props) {
     const styles = {
