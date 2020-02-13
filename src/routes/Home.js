@@ -1,7 +1,10 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { TabBar, Tab } from '@rmwc/tabs'
+import { FaRegQuestionCircle } from 'react-icons/fa'
+import { FaQuestionCircle } from 'react-icons/fa'
+
 import QuestionCard from '../components/QuestionCard'
 import TabPanel from '../components/TabPanel'
 
@@ -10,13 +13,23 @@ import '@material/tab/dist/mdc.tab.css';
 import '@material/tab-scroller/dist/mdc.tab-scroller.css';
 import '@material/tab-indicator/dist/mdc.tab-indicator.css';
 
-class Home extends Component {
+function Home(props) {
+    let { authedUser, users, questions } = props
+    const [activeTab, setActiveTab] = useState(0)
+    let answered = [], 
+        unanswered = []
 
-    componentDidMount() {
-        document.getElementById('tab-panel-2').style.display = 'none'
+    const questionValues = Object.values(questions)
+
+    for (const value of questionValues) {
+        if (value.optionOne.votes.includes(authedUser) || value.optionTwo.votes.includes(authedUser)) {
+            answered.push(value)
+        } else {
+            unanswered.push(value)
+        }
     }
 
-    compare = (a, b) => {
+    const compare = (a, b) => {
         const timestampA = new Date(a.timestamp)
         const timestampB = new Date(b.timestamp)
 
@@ -30,77 +43,66 @@ class Home extends Component {
         return comparison * -1
     }
 
-    handleClick = (evt) => {
-        let tabPanelContainer = document.getElementsByClassName('tab-panel')
-        Array.from(tabPanelContainer).forEach((el) => {
-            el.style.display = 'none'
-        })
-        let tabPanel = document.getElementById('tab-panel-' + evt.target.tabId)
-        tabPanel.style.display = 'block'
+    const handleActivate = (evt) => {
+        setActiveTab(evt.detail.index)
     }
 
-    render() {
-        let { authedUser, users, questions } = this.props
-        let answered = [], 
-            unanswered = []
-    
-        const questionValues = Object.values(questions)
+    return (
+        <div id="home">
+            {/* TODO: Extract to seperate Tabs component */}
+            <TabBar style={{ marginBottom: '16px' }} 
+                activeTabIndex={activeTab}
+                onActivate={evt => handleActivate(evt)}
+            >
+                <Tab label='Unanswered' icon={<FaRegQuestionCircle/>} stacked={true}/>
+                <Tab label='Answered' icon={<FaQuestionCircle/>} stacked={true}/> 
+            </TabBar>
 
-        for (const value of questionValues) {
-            if (value.optionOne.votes.includes(authedUser) || value.optionTwo.votes.includes(authedUser)) {
-                answered.push(value)
-            } else {
-                unanswered.push(value)
-            }
-        }
+            <div className="tab-content-container">
 
-        return (
-            <div id="home">
-                {/* TODO: Extract to seperate Tabs component */}
-                <TabBar style={{ marginBottom: '16px' }}>
-                    <Tab id="1" label='Unanswered' onInteraction={(evt) => this.handleClick(evt)}/>
-                    <Tab id="2" label='Answered' onInteraction={(evt) => this.handleClick(evt)}/> 
-                </TabBar>
+                <TabPanel 
+                    index={0}
+                    isActive={activeTab === 0}
+                >
+                    {unanswered.sort(compare).map((obj, key) => (
+                        <QuestionCard
+                            key={key}
+                            id={questions[obj.id].id}
+                            author={users[questions[obj.id].author].name}
+                            avatarURL={users[questions[obj.id].author].avatarURL}
+                            name={users[questions[obj.id].author].name}
+                            optionOne={questions[obj.id].optionOne.text}
+                            optionTwo={questions[obj.id].optionTwo.text}
+                            timestamp={questions[obj.id].timestamp}
+                        />
+                    ))}
+                </TabPanel>
 
-                <div className="tab-content-container">
+                <TabPanel 
+                    index={1}
+                    isActive={activeTab === 1}
+                >
+                    <ul>
+                    {answered.sort(compare).map(obj => (
+                        <li key={obj.id}>
+                        <QuestionCard
+                            id={questions[obj.id].id}
+                            author={users[questions[obj.id].author].name}
+                            avatarURL={users[questions[obj.id].author].avatarURL}
+                            name={users[questions[obj.id].author].name}
+                            optionOne={questions[obj.id].optionOne.text}
+                            optionTwo={questions[obj.id].optionTwo.text}
+                            timestamp={questions[obj.id].timestamp}
+                        />
+                        </li>
+                    ))}
+                    </ul>
+                </TabPanel>
 
-                    <TabPanel index={1} value={1}>
-                        {unanswered.sort(this.compare).map((obj, key) => (
-                            <QuestionCard
-                                key={key}
-                                id={questions[obj.id].id}
-                                author={users[questions[obj.id].author].name}
-                                avatarURL={users[questions[obj.id].author].avatarURL}
-                                name={users[questions[obj.id].author].name}
-                                optionOne={questions[obj.id].optionOne.text}
-                                optionTwo={questions[obj.id].optionTwo.text}
-                                timestamp={questions[obj.id].timestamp}
-                            />
-                        ))}
-                    </TabPanel>
-
-                    <TabPanel index={2} value={2}>
-                        <ul>
-                        {answered.sort(this.compare).map(obj => (
-                            <li key={obj.id}>
-                            <QuestionCard
-                                id={questions[obj.id].id}
-                                author={users[questions[obj.id].author].name}
-                                avatarURL={users[questions[obj.id].author].avatarURL}
-                                name={users[questions[obj.id].author].name}
-                                optionOne={questions[obj.id].optionOne.text}
-                                optionTwo={questions[obj.id].optionTwo.text}
-                                timestamp={questions[obj.id].timestamp}
-                            />
-                            </li>
-                        ))}
-                        </ul>
-                    </TabPanel>
-
-                </div>
             </div>
-        )
-    }
+        </div>
+    )
+
 }
 
 Home.propTypes = {

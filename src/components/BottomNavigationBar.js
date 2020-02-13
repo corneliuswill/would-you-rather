@@ -8,6 +8,25 @@ import '@material/icon-button/dist/mdc.icon-button.css';
 
 
 function BottomNavigationBar(props) {
+    const styles = {
+        container: {
+            backgroundColor: '#6200EE',
+            position: 'fixed',
+            bottom: '0',
+            left: '0',
+            width: '100%',
+            height: '56px'
+        },
+        hBar: {
+            display: 'flex',
+            justifyContent: 'space-evenly',
+            width: '100%',
+            textAlign: 'center',
+            alignItems: 'center',
+            height: '56px',
+            color: '#FFF'
+        }      
+    }
 
     const handleClick = (pathname) => {
         const path = pathname === 'home' ? '/' : `/${pathname}`
@@ -16,8 +35,8 @@ function BottomNavigationBar(props) {
     }
 
     return (
-        <div className='bottom-navigation-bar-container'>
-            <div className="bottom-navigation-bar-row">
+        <div className='bottom-navigation-bar-container' style={styles.container}>
+            <div style={styles.hBar}>
                 {props.items.map((item, index) => (
                 <IconButton
                     key={index}

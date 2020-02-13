@@ -8,9 +8,7 @@ import {
 } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { TopAppBarFixedAdjust } from '@rmwc/top-app-bar'
-import { FaTrophy } from 'react-icons/fa'
-import { FaPlus } from 'react-icons/fa'
-import { FaQuestionCircle } from 'react-icons/fa'
+import { FaHome, FaPlus, FaTrophy } from 'react-icons/fa'
 import { Grid, GridCell } from '@rmwc/grid'
 import LoadingBar from 'react-redux-loading'
 
@@ -63,7 +61,7 @@ class App extends Component {
   render() {
 
     const navButtons = [
-      { id:'home', label:'home', icon: <FaQuestionCircle/>, class: 'mdc-tab--stacked' },
+      { id:'home', label:'home', icon: <FaHome/>, class: 'mdc-tab--stacked' },
       { id:'add', label:'new', icon: <FaPlus/>, class: 'mdc-tab--stacked' },
       { id:'leaderboard', label:'leaderboard', icon: <FaTrophy/>, class: 'mdc-tab--stacked' }
     ]

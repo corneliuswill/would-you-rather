@@ -37,7 +37,7 @@ function QuestionCard(props) {
         }
     } 
     return (
-        <Card style={{ margin: '0 0 16px 0', backgroundColor: '#F8F8F8' }}>
+        <Card style={{ margin: '0 0 16px 0', backgroundColor: '#FFF' }}>
             <div>
                 <Typography
                     tag='div' 

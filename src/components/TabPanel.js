@@ -10,11 +10,17 @@ function TabPanel(props) {
             flexDirection: 'column',
             width: '100%',
             justifyContent: 'center'          
+        },
+        hidden: {
+            display: 'none'
+        },
+        visible: {
+            display: 'block'
         }
     }
 
     return (
-        <div id={`tab-panel-${index}`} className='tab-panel' style={styles.tabPanel}>
+        <div id={`tab-panel-${index}`} className={props.class} style={{...styles.tabPanel, ...props.isActive ? styles.visible : styles.hidden}}>
             {props.children}
         </div>
     )
@@ -24,7 +30,7 @@ TabPanel.propTypes = {
     children: PropTypes.node,
     class: PropTypes.string,
     index: PropTypes.number.isRequired,
-    value: PropTypes.any.isRequired
+    isActive: PropTypes.bool
 }
 
 export default TabPanel

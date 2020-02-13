@@ -1,4 +1,4 @@
-import React,  { Component } from 'react'
+import React,  { useState } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Redirect, withRouter } from 'react-router-dom'
@@ -12,38 +12,32 @@ import '@material/radio/dist/mdc.radio.css'
 import '@material/form-field/dist/mdc.form-field.css'
 import '@rmwc/avatar/avatar.css'
 
-class Question extends Component {
-    state = {
-        answer: ''
+function Question(props) {
+    const [ answer, setAnswer ] = useState('')
+    const { author, question } = props
+    
+    const handleChange = (e) => {
+        setAnswer(e.target.value) 
     }
 
-    handleChange = (e) => {
-        this.setState({
-            answer: e.target.value
-        })        
-    }
-
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        const { id } = this.props.question
-        const { answer } = this.state
-        const { dispatch } = this.props
+        const { id } = props.question
+        const { dispatch } = props
 
         dispatch(handleSaveQuestionAnswer(id, answer))
         
-        this.setState(() => ({
-            answer: ''
-        }))        
+        setAnswer('')
     }
 
-    renderPoll = (author, question) => {
+    const renderPoll = (author, question) => {
         return (
-            <form name='poll-form' onSubmit={this.handleSubmit} onChange={this.handleChange}>
+            <form name='poll-form' onSubmit={handleSubmit} onChange={handleChange}>
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                     <div>
                         <Avatar
-                            src={`/${this.props.author.avatarURL}`}
+                            src={`/${props.author.avatarURL}`}
                             size='large'
                         />
                     </div>
@@ -70,7 +64,7 @@ class Question extends Component {
                         label={question.optionOne.text}
                         value='optionOne'
                         name='radioOption'
-                        onChange={this.handleChage}
+                        onChange={handleChange}
                     />
                 </div>     
                 <div>
@@ -78,12 +72,12 @@ class Question extends Component {
                         label={question.optionTwo.text}
                         value='optionTwo'
                         name='radioOption'
-                        onChange={this.handleChage}
+                        onChange={handleChange}
                     />
                 </div>
                 <div className='action-items'>
                     <Button
-                        disabled={!this.state.answer} 
+                        disabled={!answer} 
                         raised
                         label='Vote'
                     />
@@ -92,7 +86,7 @@ class Question extends Component {
         )
     }
 
-    renderPollResults = (author, question) => {
+    const renderPollResults = (author, question) => {
         const totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length
         const optionOneVotes = question.optionOne.votes.length
         const optionTwoVotes = question.optionTwo.votes.length
@@ -133,7 +127,7 @@ class Question extends Component {
                 >
                 Results:
                 </Typography>
-                <div style={ question.optionOne.votes.includes(this.props.authedUser) ? styles.containerVoted : styles.container  }>
+                <div style={ question.optionOne.votes.includes(props.authedUser) ? styles.containerVoted : styles.container  }>
                     <p>Would you rather {question.optionOne.text}?</p>
                     <div style={styles.bar}>
                         <div style={{ height: '100%', width: `${optionOnePercentage}%`, backgroundColor: '#6610f2', borderRadius: '4px', opacity: '65%' }}></div>
@@ -142,7 +136,7 @@ class Question extends Component {
                         {`${optionOneVotes} out of ${totalVotes} votes`}
                     </div>
                 </div>
-                <div style={ question.optionTwo.votes.includes(this.props.authedUser) ? styles.containerVoted : styles.container }>
+                <div style={ question.optionTwo.votes.includes(props.authedUser) ? styles.containerVoted : styles.container }>
                     <p>Would you rather {question.optionTwo.text}?</p>
                     <div style={styles.bar}>
                         <div style={{ height: '100%', width: `${optionTwoPercentage}%`, backgroundColor: '#6610f2', borderRadius: '4px', opacity: '65%' }}></div>
@@ -155,23 +149,20 @@ class Question extends Component {
         )
     }
 
-    render() {
-        const { author, question } = this.props
-
-        if (!question) {
-            return <Redirect to='/error' />
-        }
-
-        return (
-            <div id='question'>
-                { question.optionOne.votes.includes(this.props.authedUser) || question.optionTwo.votes.includes(this.props.authedUser) ? (
-                    this.renderPollResults(author, question)
-                ) : (
-                    this.renderPoll(author, question)
-                )}
-            </div>
-        )
+    if (!question) {
+        return <Redirect to='/error' />
     }
+
+    return (
+        <div id='question'>
+            { question.optionOne.votes.includes(props.authedUser) || question.optionTwo.votes.includes(props.authedUser) ? (
+                renderPollResults(author, question)
+            ) : (
+                renderPoll(author, question)
+            )}
+        </div>
+    )
+
 }
 
 Question.propTypes = {

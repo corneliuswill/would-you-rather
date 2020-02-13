@@ -73,7 +73,7 @@ function AppBar(props) {
                 <DrawerHeader style={styles.drawerHeader}>
                     <div>
                         <Avatar
-                            src={props.avatarURL}
+                            src={props.avatarURL === '' ? 'images/avatars/add.png' : props.avatarURL}
                             size='xlarge'
                         />
                     </div>
