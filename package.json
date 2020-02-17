@@ -22,6 +22,7 @@
         "@testing-library/user-event": "^7.1.2",
         "bootstrap": "^4.4.1",
         "cypress": "^3.8.2",
+        "env-cmd": "^10.1.0",
         "lodash": "^4.17.15",
         "prop-types": "^15.7.2",
         "react": "^16.12.0",
@@ -41,7 +42,10 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "dev": "react-scripts start",
+        "staging": "",
+        "prod": ""
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -66,5 +70,5 @@
         "eslint-plugin-react": "^7.18.3",
         "react-test-renderer": "^16.12.0"
     },
-    "homepage": "http://williamsarts.com/wouldyourather"
+    "homepage": "."
 }

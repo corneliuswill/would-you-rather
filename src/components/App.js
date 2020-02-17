@@ -24,7 +24,6 @@ import NotFound from '../routes/NotFound'
 import { fakeAuth } from '../utils/auth'
 import { setAuthedUser } from '../actions/authedUser'
 
-//import 'bootstrap/dist/css/bootstrap.min.css';
 import '@material/layout-grid/dist/mdc.layout-grid.css';
 
 class App extends Component {
@@ -59,15 +58,30 @@ class App extends Component {
   }
 
   render() {
-
+    console.log('process.env.PUBLIC_URL', process.env.PUBLIC_URL)
     const navButtons = [
-      { id:'home', label:'home', icon: <FaHome/>, class: 'mdc-tab--stacked' },
-      { id:'add', label:'new', icon: <FaPlus/>, class: 'mdc-tab--stacked' },
-      { id:'leaderboard', label:'leaderboard', icon: <FaTrophy/>, class: 'mdc-tab--stacked' }
+      { 
+        id:'home', 
+        label:'home', 
+        icon: <FaHome style={{ opacity: '76%' }}/>,
+        onIcon: <FaHome/>,
+      },
+      { 
+        id:'add', 
+        label:'new', 
+        icon: <FaPlus style={{ opacity: '76%' }}/>,
+        onIcon: <FaPlus/>, 
+      },
+      { 
+        id:'leaderboard', 
+        label:'leaderboard', 
+        icon: <FaTrophy style={{ opacity: '76%' }}/>,
+        onIcon: <FaTrophy/>, 
+      }
     ]
 
     return (
-      <Router>
+      <Router basename='/wouldyourather'>
         <AppBar
           title='Would You Rather?'
           handleLogOut={this.handleLogOut}
@@ -108,6 +122,8 @@ class App extends Component {
         {this.state.isLoggedIn && 
           <BottomNavigationBar
             items={navButtons}
+            className='test-class'
+            backgroundColor='#0336FF'
           />
         }
       </Router>

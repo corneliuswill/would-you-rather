@@ -37,7 +37,7 @@ function Question(props) {
                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                     <div>
                         <Avatar
-                            src={`/${props.author.avatarURL}`}
+                            src={`${props.author.avatarURL}`}
                             size='large'
                         />
                     </div>
