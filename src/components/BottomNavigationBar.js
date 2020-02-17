@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { IconButton } from '@rmwc/icon-button'
@@ -6,9 +6,11 @@ import { IconButton } from '@rmwc/icon-button'
 import '@material/icon-button/dist/mdc.icon-button.css';
 
 function BottomNavigationBar(props) {
+    const [isChecked, setIsChecked] = useState(false)
+
     const styles = {
         container: {
-            backgroundColor: '#6200EE',
+            backgroundColor: props.backgroundColor,
             position: 'fixed',
             bottom: '0',
             left: '0',
@@ -30,17 +32,21 @@ function BottomNavigationBar(props) {
         const path = pathname === 'home' ? '/' : `/${pathname}`
 
         props.history.push(path);
+
+        setIsChecked(!isChecked)
     }
 
     return (
-        <div className='bottom-navigation-bar-container' style={styles.container}>
+        <div className={['bottom-navigation-bar-container', props.className].join(' ')} style={styles.container}>
             <div style={styles.hBar}>
                 {props.items.map((item, index) => (
                 <IconButton
                     key={index}
+                    checked={isChecked}
                     aria-label={item.aria} 
                     alt={item.alt} 
-                    icon={item.icon} 
+                    icon={item.icon}
+                    onIcon={item.onIcon} 
                     onClick={() => handleClick(item.id)}
                 />
                 ))}
@@ -52,11 +58,14 @@ function BottomNavigationBar(props) {
 BottomNavigationBar.propTypes = {
     backgroundColor: PropTypes.string,
     children: PropTypes.node,
-    class: PropTypes.string,
+    className: PropTypes.string,
     currentIndex: PropTypes.number,
     items: PropTypes.array,
     history: PropTypes.object
 }
 
+BottomNavigationBar.defaultProps = {
+    backgroundColor: '#6200EE'
+}
 
 export default withRouter(BottomNavigationBar)

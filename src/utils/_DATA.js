@@ -2,7 +2,7 @@ let users = {
     sarahedo: {
       id: 'sarahedo',
       name: 'Sarah Edo',
-      avatarURL: 'images/avatars/sarahedo.png',
+      avatarURL: '/images/avatars/sarahedo.png',
       answers: {
         "8xf0y6ziyjabvozdd253nd": 'optionOne',
         "6ni6ok3ym7mf1p33lnez": 'optionTwo',
@@ -14,7 +14,7 @@ let users = {
     tylermcginnis: {
       id: 'tylermcginnis',
       name: 'Tyler McGinnis',
-      avatarURL: 'images/avatars/tmcginnis.png',
+      avatarURL: '/images/avatars/tmcginnis.png',
       answers: {
         "vthrdm985a262al8qx3do": 'optionOne',
         "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -24,7 +24,7 @@ let users = {
     johndoe: {
       id: 'johndoe',
       name: 'John Doe',
-      avatarURL: 'images/avatars/johndoe.png',
+      avatarURL: '/images/avatars/johndoe.png',
       answers: {
         "xj352vofupe1dqz9emx13r": 'optionOne',
         "vthrdm985a262al8qx3do": 'optionTwo',
@@ -35,49 +35,49 @@ let users = {
     janedoe: {
       id: 'janedoe',
       name: 'Jane Doe',
-      avatarURL: 'images/avatars/janedoe.png',
+      avatarURL: '/images/avatars/janedoe.png',
       answers: {},
       questions: [],
     },       
     cwilliams: {
       id: 'cwilliams',
       name: 'Cornelius Williams',
-      avatarURL: 'images/avatars/blank.png',
+      avatarURL: '/images/avatars/blank.png',
       answers: {},
       questions: [],
     },
     amenbey: {
       id: 'amenbey',
       name: 'Amen Bey',
-      avatarURL: 'images/avatars/amenbey.png',
+      avatarURL: '/images/avatars/amenbey.png',
       answers: {},
       questions: [],
     },
     chrisanteola: {
       id: 'chrisanteola',
       name: 'Chris Anteola',
-      avatarURL: 'images/avatars/chrisanteola.png',
+      avatarURL: '/images/avatars/chrisanteola.png',
       answers: {},
       questions: [],
     },
     shantrice: {
       id: 'shantrice',
       name: 'Shantrice Mckoy',
-      avatarURL: 'images/avatars/shantrice.png',
+      avatarURL: '/images/avatars/shantrice.png',
       answers: {},
       questions: [],
     },              
     ruben: {
       id: 'ruben',
-      name: 'Ruben Sanduval',
-      avatarURL: 'images/avatars/ruben.png',
+      name: 'Ruben Sandoval',
+      avatarURL: '/images/avatars/ruben.png',
       answers: {},
       questions: [],
     },
     mcelroy: {
       id: 'mcelroy',
       name: 'McElroy',
-      avatarURL: 'images/avatars/mcelroy.png',
+      avatarURL: '/images/avatars/mcelroy.png',
       answers: {},
       questions: [],
     }        
