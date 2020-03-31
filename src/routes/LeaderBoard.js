@@ -84,7 +84,7 @@ function LeaderBoard(props) {
                 <div style={styles.avatarContainer}>
                     <div style={{ marginRight: '8px'}}>
                         <Avatar
-                            src={user.avatarURL}
+                            src={process.env.PUBLIC_URL + user.avatarURL}
                             size='xlarge'
                         />
                     </div>
@@ -127,7 +127,7 @@ function LeaderBoard(props) {
                 >
                     LEADERBOARD
                 </Typography>
-            </div>            
+            </div>
             {sortedUsers.map((user, index) => {
                 if (prevScore === user.sum) {
                     rank = prevRank

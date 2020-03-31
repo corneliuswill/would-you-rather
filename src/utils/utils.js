@@ -1,4 +1,5 @@
 const months = [
+    'placeholder',
     'January',
     'February',
     'March',

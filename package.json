@@ -21,7 +21,7 @@
         "@testing-library/react": "^9.3.2",
         "@testing-library/user-event": "^7.1.2",
         "bootstrap": "^4.4.1",
-        "cypress": "^3.8.2",
+        "chai": "^4.2.0",
         "env-cmd": "^10.1.0",
         "lodash": "^4.17.15",
         "prop-types": "^15.7.2",
@@ -41,11 +41,14 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
+        "build:staging": "env-cmd -f .env.staging npm run build",
+        "build:prod": "env-cmd -f .env npm run build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "dev": "react-scripts start",
         "staging": "",
-        "prod": ""
+        "prod": "",
+        "cypress:open": "cypress open"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -64,11 +67,12 @@
     },
     "devDependencies": {
         "babel-eslint": "^10.0.3",
+        "cypress": "^4.0.2",
         "enzyme": "^3.11.0",
         "enzyme-adapter-react-16": "^1.15.2",
         "eslint": "^6.8.0",
         "eslint-plugin-react": "^7.18.3",
         "react-test-renderer": "^16.12.0"
     },
-    "homepage": "."
+    "homepage": "https://www.williamsarts.com/wouldyourather"
 }

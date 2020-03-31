@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { 
-  BrowserRouter as Router, 
-  Route, 
+import {
+  BrowserRouter as Router,
+  Route,
   Redirect,
   Switch
 } from 'react-router-dom'
@@ -53,30 +53,29 @@ class App extends Component {
 
   handleLogOut = () => {
     fakeAuth.signout()
-    this.setState({ isLoggedIn: false })                                                                                                                                                                                                             
+    this.setState({ isLoggedIn: false })
     this.props.setAuthedUser(null)
   }
 
   render() {
-    console.log('process.env.PUBLIC_URL', process.env.PUBLIC_URL)
     const navButtons = [
-      { 
-        id:'home', 
-        label:'home', 
+      {
+        id:'home',
+        label:'home',
         icon: <FaHome style={{ opacity: '76%' }}/>,
         onIcon: <FaHome/>,
       },
-      { 
-        id:'add', 
-        label:'new', 
+      {
+        id:'add',
+        label:'new',
         icon: <FaPlus style={{ opacity: '76%' }}/>,
-        onIcon: <FaPlus/>, 
+        onIcon: <FaPlus/>,
       },
-      { 
-        id:'leaderboard', 
-        label:'leaderboard', 
+      {
+        id:'leaderboard',
+        label:'leaderboard',
         icon: <FaTrophy style={{ opacity: '76%' }}/>,
-        onIcon: <FaTrophy/>, 
+        onIcon: <FaTrophy/>,
       }
     ]
 
@@ -92,11 +91,11 @@ class App extends Component {
         <TopAppBarFixedAdjust/>
         <LoadingBar/>
         <Grid>
-          <GridCell span={12}>        
+          <GridCell span={12}>
             <div className='container content-container'>
               {this.props.loading === true
                 ? null
-                : 
+                :
                 <Switch>
                   <PrivateRoute path='/' exact>
                     <Home/>
@@ -114,12 +113,12 @@ class App extends Component {
                     <NewQuestion/>
                   </PrivateRoute>
                   <Route path='/*' component={NotFound} />
-                </Switch>            
+                </Switch>
               }
             </div>
           </GridCell>
         </Grid>
-        {this.state.isLoggedIn && 
+        {this.state.isLoggedIn &&
           <BottomNavigationBar
             items={navButtons}
             className='test-class'

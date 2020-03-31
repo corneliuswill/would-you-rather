@@ -33,14 +33,14 @@ function QuestionCard(props) {
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
-            margin: '0 16px'            
+            margin: '0 16px'
         }
-    } 
+    }
     return (
         <Card style={{ margin: '0 0 16px 0', backgroundColor: '#FFF' }}>
             <div>
                 <Typography
-                    tag='div' 
+                    tag='div'
                     use='caption'
                     style={{ color: '#616161', padding: '16px 16px 0 16px'}}
                 >
@@ -50,7 +50,7 @@ function QuestionCard(props) {
             <div style={styles.questionCardHeader}>
                 <div>
                     <Avatar
-                        src={props.avatarURL}
+                        src={process.env.PUBLIC_URL + props.avatarURL}
                         size='large'
                     />
                 </div>
@@ -59,15 +59,15 @@ function QuestionCard(props) {
                         use='headline6'
                         tag='h2'
                     >
-                        {name} asks: 
+                        {name} asks:
                     </Typography>
                 </div>
             </div>
 
             <CardPrimaryAction>
                 <div style={{ padding: '0 16px 0 16px' }}>
-                    <div style={{ margin: '0 0 16px 0'}}>       
-                        <Typography 
+                    <div style={{ margin: '0 0 16px 0'}}>
+                        <Typography
                             use='body2'
                             style={{ fontWeight: '600', color: '#333' }}
                         >
@@ -80,7 +80,7 @@ function QuestionCard(props) {
                         >
                             ...{optionOne} or...
                         </Typography>
-                    </div>                    
+                    </div>
                 </div>
             </CardPrimaryAction>
             <CardActions>
