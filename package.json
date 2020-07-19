@@ -22,7 +22,7 @@
         "@testing-library/user-event": "^7.1.2",
         "bootstrap": "^4.4.1",
         "cypress": "^3.8.2",
-        "lodash": "^4.17.15",
+        "lodash": "^4.17.19",
         "prop-types": "^15.7.2",
         "react": "^16.12.0",
         "react-bootstrap": "^1.0.0-beta.16",
